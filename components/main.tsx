@@ -5,6 +5,17 @@ export default function Main() {
     <main className="relative flex-1 bg-background p-3 space-y-3">
       <h5 className="font-bold">Tell me about yourself</h5>
 
+      <p>I&apos;m Jon Angelo Comia, a software developer with over 9 years of experience building web applications using Nexts.js, React, Angular, Node.js, Supabase, Wordpress and Shopify.</p>
+
+      <p>Throughout my career, I&apos;ve enjoyed turning designs into beautiful and user-friendly interfaces. My goal is to build applications that balance strong security with better user experience.</p>
+
+      <p>In my last job. I developed and maintained a large scale web-application using React Next.js and Supabase. I worked closely with the product owner to deliver the app as he also designs it.</p>
+
+      <p>What interests me about working at Bridgit is the opportunity to continue building products in the property and finance space. I&apos;m excited to contribute my experience while continuing to grow in the fintech industry.</p>
+
+
+      <h5 className="font-bold">Tell me about yourself</h5>
+
       <p>Hi, I&apos;m Jon Angelo, a Software Developer with over nine years of experience building web applications using technologies such as Next.js, React, Angular, TypeScript, Node.js, Supabase, WordPress, and Shopify.</p>
 
       <p>Throughout my career, I&apos;ve enjoyed building responsive, user-friendly applications with a strong focus on creating intuitive user experiences. I like turning designs into clean, maintainable interfaces and building forms that are easy to understand and complete, while ensuring users get the right amount of information without feeling overwhelmed.</p>
