@@ -138,13 +138,13 @@ export default function Main() {
     <div class="answer"><p><code>map</code> transforms each item (same length), <code>filter</code> keeps items passing a test, <code>reduce</code> folds the array into a single value (sum, object, grouping).</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>Implement debounce.</summary>
-    <div class="answer"><pre><code>function debounce(fn, ms){
+    <div class="answer"><pre><code>{`function debounce(fn, ms){
   let t;
   return (...args) => {
     clearTimeout(t);
     t = setTimeout(() => fn(...args), ms);
   };
-}</code></pre><p>Debounce waits until calls stop for <code>ms</code>; throttle instead runs at most once per <code>ms</code>.</p></div></details>
+}`}</code></pre><p>Debounce waits until calls stop for <code>ms</code>; throttle instead runs at most once per <code>ms</code>.</p></div></details>
 </section>
 
 <section id="react">
@@ -210,9 +210,9 @@ export default function Main() {
     <div class="answer"><p><code>any</code> disables checking. <code>unknown</code> is the type-safe top type — you must narrow before use. Prefer <code>unknown</code> for uncertain shapes (API responses, catch clauses).</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>Give a use of generics.</summary>
-    <div class="answer"><pre><code>function first&lt;T&gt;(arr: T[]): T | undefined {
+    <div class="answer"><pre><code>{`function first&lt;T&gt;(arr: T[]): T | undefined {
   return arr[0];
-}</code></pre><p>Generics keep code reusable while preserving the caller's specific type instead of collapsing to <code>any</code>.</p></div></details>
+}`}</code></pre><p>Generics keep code reusable while preserving the caller's specific type instead of collapsing to <code>any</code>.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>Useful utility types?</summary>
     <div class="answer"><p><code>Partial</code>, <code>Required</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>, <code>ReturnType</code>. Great for deriving DTOs/patch types from a base model without duplicating shapes.</p></div></details>
