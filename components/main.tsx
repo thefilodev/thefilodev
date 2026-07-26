@@ -195,7 +195,6 @@ export default function Main() {
   </div>
 </nav>
 
-<main class="wrap">
 
 <!-- FIT -->
 <section id="fit">
@@ -652,8 +651,6 @@ export default function Main() {
     </ul>
   </div>
 </section>
-
-</main>
 
 <footer class="wrap">Study tool · self-quiz mode · tap any question to reveal · "Reveal all" to read straight through</footer>
 
