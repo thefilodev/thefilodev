@@ -129,7 +129,7 @@ export default function Main() {
     <div class="answer"><p>By the call site: method call → the object; plain call → undefined/global; arrow functions inherit <code>this</code> lexically; <code>call</code>/<code>apply</code>/<code>bind</code> set it explicitly.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>Shallow vs deep copy?</summary>
-    <div class="answer"><p>Shallow (<code>{...obj}</code>, <code>Object.assign</code>) copies the top level only — nested objects stay shared by reference. Deep copy duplicates everything (<code>structuredClone</code>, or the JSON round-trip for simple data).</p></div></details>
+    <div class="answer"><p>Shallow (<code>{`{...obj}`}</code>, <code>Object.assign</code>) copies the top level only — nested objects stay shared by reference. Deep copy duplicates everything (<code>structuredClone</code>, or the JSON round-trip for simple data).</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>What is event delegation?</summary>
     <div class="answer"><p>Attach one listener to a parent and read <code>event.target</code> to handle events from many/dynamic children — fewer listeners, works for elements added later.</p></div></details>
@@ -218,15 +218,15 @@ export default function Main() {
     <div class="answer"><p><code>Partial</code>, <code>Required</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>, <code>ReturnType</code>. Great for deriving DTOs/patch types from a base model without duplicating shapes.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>What is a discriminated union?</summary>
-    <div class="answer"><pre><code>type Result =
+    <div class="answer"><pre><code>{`type Result =
   | { status: 'ok'; data: string }
-  | { status: 'error'; message: string };</code></pre><p>Checking the shared literal (<code>status</code>) narrows to the right branch — safer than optional fields everywhere.</p></div></details>
+  | { status: 'error'; message: string };`}</code></pre><p>Checking the shared literal (<code>status</code>) narrows to the right branch — safer than optional fields everywhere.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>keyof and typeof?</summary>
     <div class="answer"><p><code>keyof T</code> gives a union of a type's keys; <code>typeof value</code> gets the type of a runtime value. Combined — <code>keyof typeof obj</code> — you derive key unions from a constant object.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>What are mapped types?</summary>
-    <div class="answer"><p>Types built by iterating keys of another type: <code>{ [K in keyof T]: ... }</code>. Utility types like <code>Partial</code> are mapped types under the hood.</p></div></details>
+    <div class="answer"><p>Types built by iterating keys of another type: <code>{`{ [K in keyof T]: ... }`}</code>. Utility types like <code>Partial</code> are mapped types under the hood.</p></div></details>
 
   <details class="qa"><summary><span class="chev">›</span>Type guards / narrowing?</summary>
     <div class="answer"><p>Runtime checks that narrow a type — <code>typeof</code>, <code>instanceof</code>, <code>in</code>, or a custom predicate <code>function isCat(x): x is Cat</code>. After the check, TS treats the value as the narrower type.</p></div></details>
