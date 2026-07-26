@@ -21,7 +21,7 @@ export default function Main() {
         <p>The JD's core theme. You've been doing exactly this on Campaignr — validation, auth, secrets, N+1s, tests. Few candidates can speak to it from real recent work. Lead with it.</p>
       </div>
       <div className="strat">
-        <h3><span style="color:var(--accent-ink)">₱</span> Salary — go in anchored</h3>
+        <h3><span>₱</span> Salary — go in anchored</h3>
         <p>Company has a low-comp reputation. Decide an X–Y band before the call. Deflection line: "What range is the role budgeted for?" Don't give a single number first.</p>
       </div>
     </div>
