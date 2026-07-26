@@ -4,6 +4,154 @@ export default function Main() {
   return (
     <main className="relative flex-1 bg-background p-3 space-y-3">
 
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F7FB;
+    --card:#FFFFFF;
+    --ink:#15161F;
+    --ink-soft:#4A4C5C;
+    --ink-faint:#8A8D9E;
+    --line:#E6E7F0;
+    --accent:#5B4FE9;
+    --accent-soft:#EEEBFE;
+    --accent-ink:#3B2FD0;
+    --code-bg:#1A1B2B;
+    --code-ink:#E7E8F5;
+    --ok:#0E9F6E;
+    --warn:#C2410C;
+    --radius:14px;
+    --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+  /* Header */
+  .masthead{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent-ink);font-weight:600;margin:0 0 14px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:-.02em;margin:0 0 12px;
+  }
+  .stack{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;
+  }
+  .stack span{background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+
+  /* Battle card */
+  .battle{margin:28px 0 8px;display:grid;gap:12px}
+  .strat{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:var(--radius);padding:16px 18px;
+  }
+  .strat h3{
+    font-family:'Space Grotesk',sans-serif;font-size:15px;margin:0 0 4px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .strat p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  .tag-gap{color:var(--warn)}
+  .tag-edge{color:var(--ok)}
+
+  /* Sticky nav */
+  nav.jump{
+    position:sticky;top:0;z-index:20;background:rgba(246,247,251,.86);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 0;margin-top:32px;
+  }
+  .jump-inner{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  nav.jump a{
+    font-family:'JetBrains Mono',monospace;font-size:12px;text-decoration:none;
+    color:var(--ink-soft);background:var(--card);border:1px solid var(--line);
+    padding:6px 11px;border-radius:999px;transition:all .15s;
+  }
+  nav.jump a:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .reveal-btn{
+    margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    cursor:pointer;background:var(--accent);color:#fff;border:none;padding:7px 14px;
+    border-radius:999px;transition:opacity .15s;
+  }
+  .reveal-btn:hover{opacity:.88}
+  .reveal-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+
+  /* Sections */
+  section{padding:40px 0 8px;scroll-margin-top:70px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-ink);font-weight:600}
+  h2{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;
+    letter-spacing:-.02em;margin:0;
+  }
+  .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-faint);margin-left:auto}
+  .sec-note{color:var(--ink-soft);font-size:14.5px;margin:8px 0 20px}
+
+  /* Fit scripts (open by default) */
+  .script{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;margin:12px 0;
+  }
+  .script .q{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0 0 10px}
+  .say{
+    border-left:3px solid var(--accent);background:var(--accent-soft);
+    padding:12px 15px;border-radius:0 10px 10px 0;font-size:15px;color:var(--ink);
+  }
+  .coach{font-size:13.5px;color:var(--ink-faint);font-style:italic;margin:10px 0 0}
+
+  /* Technical Q cards (collapsible) */
+  details.qa{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    margin:10px 0;overflow:hidden;
+  }
+  details.qa[open]{border-color:#D9DAEA}
+  details.qa summary{
+    cursor:pointer;list-style:none;padding:15px 18px;font-weight:500;font-size:15.5px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  .chev{
+    color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:700;
+    flex-shrink:0;transition:transform .2s;margin-top:1px;
+  }
+  details.qa[open] .chev{transform:rotate(90deg)}
+  details.qa summary:hover{background:#FCFCFF}
+  .answer{padding:0 18px 18px 42px;font-size:14.8px;color:var(--ink-soft)}
+  .answer p{margin:0 0 10px}
+  .answer p:last-child{margin-bottom:0}
+  code{
+    font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--accent-soft);
+    color:var(--accent-ink);padding:1.5px 5px;border-radius:5px;
+  }
+  pre{
+    background:var(--code-bg);color:var(--code-ink);border-radius:10px;
+    padding:13px 15px;overflow-x:auto;margin:10px 0;
+  }
+  pre code{background:none;color:var(--code-ink);padding:0;font-size:13px;line-height:1.5}
+
+  /* Checklist */
+  .check{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:14px 0 8px}
+  .check ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .check li{display:flex;gap:11px;align-items:center;font-size:15px}
+  .box{width:18px;height:18px;border:2px solid var(--accent);border-radius:5px;flex-shrink:0}
+
+  footer{padding:40px 0 60px;color:var(--ink-faint);font-size:13px;font-family:'JetBrains Mono',monospace;border-top:1px solid var(--line);margin-top:40px}
+
+  @media (max-width:560px){
+    .masthead{padding:36px 0 24px}
+    .answer{padding-left:18px}
+    .count{width:100%;margin-left:0;order:3}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+
 <header class="masthead">
   <div class="wrap">
     <p class="eyebrow">Interview Prep · 30-min Recruiter Screen</p>
@@ -47,8 +195,6 @@ export default function Main() {
   </div>
 </nav>
 
-
-<!-- FIT -->
 <section id="fit">
   <div class="sec-head"><span class="sec-num">01</span><h2>Initial / Fit Questions</h2><span class="count">10 scripts</span></div>
   <p class="sec-note">Rehearse these out loud. Answers are drawn from your actual resume — swap in real numbers where you can.</p>
@@ -109,7 +255,6 @@ export default function Main() {
   </div>
 </section>
 
-<!-- JS CORE -->
 <section id="js">
   <div class="sec-head"><span class="sec-num">02</span><h2>JavaScript Fundamentals</h2><span class="count">10 Q</span></div>
   <p class="sec-note">Click a question to reveal the answer — quiz yourself first.</p>
@@ -151,7 +296,6 @@ export default function Main() {
 }</code></pre><p>Debounce waits until calls stop for <code>ms</code>; throttle instead runs at most once per <code>ms</code>.</p></div></details>
 </section>
 
-<!-- REACT -->
 <section id="react">
   <div class="sec-head"><span class="sec-num">03</span><h2>React &amp; Next.js</h2><span class="count">16 Q</span></div>
   <p class="sec-note">Your strongest area — know these cold.</p>
@@ -205,7 +349,6 @@ export default function Main() {
     <div class="answer"><p>Renders children into a different DOM node outside the parent hierarchy while keeping React context — used for modals, tooltips, and toasts that must escape overflow/z-index constraints.</p></div></details>
 </section>
 
-<!-- TS -->
 <section id="ts">
   <div class="sec-head"><span class="sec-num">04</span><h2>TypeScript</h2><span class="count">11 Q</span></div>
 
@@ -247,7 +390,6 @@ export default function Main() {
     <div class="answer"><p><code>value!</code> tells TS a value isn't null/undefined. Use sparingly — it silences the compiler rather than proving safety, so prefer a real check when you can.</p></div></details>
 </section>
 
-<!-- NODE -->
 <section id="node">
   <div class="sec-head"><span class="sec-num">05</span><h2>Node.js &amp; Express</h2><span class="count">11 Q</span></div>
 
@@ -285,7 +427,6 @@ export default function Main() {
     <div class="answer"><p>On <code>SIGTERM</code>, stop accepting new connections, let in-flight requests finish, close DB/pool connections, then exit — so deploys don't drop live requests.</p></div></details>
 </section>
 
-<!-- POSTGRES -->
 <section id="pg">
   <div class="sec-head"><span class="sec-num">06</span><h2>PostgreSQL &amp; Databases</h2><span class="count">15 Q</span></div>
 
@@ -335,7 +476,6 @@ export default function Main() {
     <div class="answer"><p>Version-controlled, incremental migration files run in order (Prisma Migrate, Knex, etc.), tested in staging, and applied in CI. Make destructive changes backwards-compatible and roll out in steps.</p></div></details>
 </section>
 
-<!-- RN -->
 <section id="rn">
   <div class="sec-head"><span class="sec-num">07</span><h2>React Native</h2><span class="count">7 Q</span></div>
   <p class="sec-note">Your growth area — competent, honest answers. Don't overclaim depth.</p>
@@ -362,7 +502,6 @@ export default function Main() {
     <div class="answer"><p>Flexbox layouts, the <code>Dimensions</code>/<code>useWindowDimensions</code> API, percentage and flex sizing, and safe-area handling for notches. Test on multiple device sizes.</p></div></details>
 </section>
 
-<!-- TESTING -->
 <section id="test">
   <div class="sec-head"><span class="sec-num">08</span><h2>Testing</h2><span class="count">7 Q</span></div>
 
@@ -388,7 +527,6 @@ export default function Main() {
     <div class="answer"><p>Same testing model; Vitest is faster and native to Vite/ESM projects, Jest is the long-standing default with a huge ecosystem. Choose based on your build tooling.</p></div></details>
 </section>
 
-<!-- ARCH -->
 <section id="arch">
   <div class="sec-head"><span class="sec-num">09</span><h2>System Design &amp; Architecture</h2><span class="count">13 Q</span></div>
 
@@ -432,7 +570,6 @@ export default function Main() {
     <div class="answer"><p>Shared lint/format/TS config, meaningful PR reviews, tests in CI, clear conventions, and docs for non-obvious decisions. Automate standards so they don't rely on memory.</p></div></details>
 </section>
 
-<!-- SECURITY -->
 <section id="sec">
   <div class="sec-head"><span class="sec-num">10</span><h2>Security</h2><span class="count">5 Q</span></div>
 
@@ -452,7 +589,6 @@ export default function Main() {
     <div class="answer"><p>localStorage is readable by any JS, so it's exposed to XSS. Prefer httpOnly, Secure, SameSite cookies so tokens aren't reachable from scripts, paired with CSRF protection.</p></div></details>
 </section>
 
-<!-- PAYMENTS -->
 <section id="pay">
   <div class="sec-head"><span class="sec-num">11</span><h2>Payments &amp; Integrations</h2><span class="count">4 Q</span></div>
   <p class="sec-note">You've built Stripe auth-plus-capture on Campaignr — these are yours to win.</p>
@@ -470,7 +606,6 @@ export default function Main() {
     <div class="answer"><p>A runtime schema-validation library that also infers TS types from one schema. Validate untrusted input — form data, API bodies, env vars, webhook payloads — so bad data is rejected at the boundary with real type safety.</p></div></details>
 </section>
 
-<!-- GIT -->
 <section id="git">
   <div class="sec-head"><span class="sec-num">12</span><h2>Git &amp; Workflow</h2><span class="count">4 Q</span></div>
 
@@ -487,7 +622,6 @@ export default function Main() {
     <div class="answer"><p>On push/PR: install, lint, type-check, run tests, build. On merge to main: deploy (often to staging first, then production), sometimes behind an approval. GitHub Actions is a common runner.</p></div></details>
 </section>
 
-<!-- CHECKLIST -->
 <section id="checklist">
   <div class="sec-head"><span class="sec-num">13</span><h2>Pre-call checklist</h2></div>
   <div class="check">
@@ -505,6 +639,8 @@ export default function Main() {
 </section>
 
 <footer class="wrap">Study tool · self-quiz mode · tap any question to reveal · "Reveal all" to read straight through</footer>
+
+
 
       <h5 className="font-bold">Why should we hire you?</h5>
       <p>
