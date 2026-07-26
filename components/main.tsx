@@ -3,66 +3,659 @@
 export default function Main() {
   return (
     <main className="relative flex-1 bg-background p-3 space-y-3">
-      <h5 className="font-bold">Tell me about yourself</h5>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F7FB;
+    --card:#FFFFFF;
+    --ink:#15161F;
+    --ink-soft:#4A4C5C;
+    --ink-faint:#8A8D9E;
+    --line:#E6E7F0;
+    --accent:#5B4FE9;
+    --accent-soft:#EEEBFE;
+    --accent-ink:#3B2FD0;
+    --code-bg:#1A1B2B;
+    --code-ink:#E7E8F5;
+    --ok:#0E9F6E;
+    --warn:#C2410C;
+    --radius:14px;
+    --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
-      <p>I&apos;m Jon Angelo Comia, a software developer with over 9 years of experience building web applications using Nexts.js, React, Angular, Node.js, Supabase, Wordpress and Shopify.</p>
+  /* Header */
+  .masthead{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent-ink);font-weight:600;margin:0 0 14px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:-.02em;margin:0 0 12px;
+  }
+  .stack{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;
+  }
+  .stack span{background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
 
-      <p>Throughout my career, I&apos;ve enjoyed turning designs into beautiful and user-friendly interfaces. My goal is to build applications that balance strong security with better user experience.</p>
+  /* Battle card */
+  .battle{margin:28px 0 8px;display:grid;gap:12px}
+  .strat{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:var(--radius);padding:16px 18px;
+  }
+  .strat h3{
+    font-family:'Space Grotesk',sans-serif;font-size:15px;margin:0 0 4px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .strat p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  .tag-gap{color:var(--warn)}
+  .tag-edge{color:var(--ok)}
 
-      <p>In my last job. I developed and maintained a large scale web-application using React Next.js and Supabase. I worked closely with the product owner to deliver the app as he also designs it.</p>
+  /* Sticky nav */
+  nav.jump{
+    position:sticky;top:0;z-index:20;background:rgba(246,247,251,.86);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 0;margin-top:32px;
+  }
+  .jump-inner{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  nav.jump a{
+    font-family:'JetBrains Mono',monospace;font-size:12px;text-decoration:none;
+    color:var(--ink-soft);background:var(--card);border:1px solid var(--line);
+    padding:6px 11px;border-radius:999px;transition:all .15s;
+  }
+  nav.jump a:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .reveal-btn{
+    margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    cursor:pointer;background:var(--accent);color:#fff;border:none;padding:7px 14px;
+    border-radius:999px;transition:opacity .15s;
+  }
+  .reveal-btn:hover{opacity:.88}
+  .reveal-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
 
-      <p>What interests me about working at Bridgit is the opportunity to continue building products in the property and finance space. I&apos;m excited to contribute my experience while continuing to grow in the fintech industry.</p>
+  /* Sections */
+  section{padding:40px 0 8px;scroll-margin-top:70px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-ink);font-weight:600}
+  h2{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;
+    letter-spacing:-.02em;margin:0;
+  }
+  .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-faint);margin-left:auto}
+  .sec-note{color:var(--ink-soft);font-size:14.5px;margin:8px 0 20px}
 
+  /* Fit scripts (open by default) */
+  .script{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;margin:12px 0;
+  }
+  .script .q{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0 0 10px}
+  .say{
+    border-left:3px solid var(--accent);background:var(--accent-soft);
+    padding:12px 15px;border-radius:0 10px 10px 0;font-size:15px;color:var(--ink);
+  }
+  .coach{font-size:13.5px;color:var(--ink-faint);font-style:italic;margin:10px 0 0}
 
-      <h5 className="font-bold">Tell me about yourself</h5>
+  /* Technical Q cards (collapsible) */
+  details.qa{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    margin:10px 0;overflow:hidden;
+  }
+  details.qa[open]{border-color:#D9DAEA}
+  details.qa summary{
+    cursor:pointer;list-style:none;padding:15px 18px;font-weight:500;font-size:15.5px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  .chev{
+    color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:700;
+    flex-shrink:0;transition:transform .2s;margin-top:1px;
+  }
+  details.qa[open] .chev{transform:rotate(90deg)}
+  details.qa summary:hover{background:#FCFCFF}
+  .answer{padding:0 18px 18px 42px;font-size:14.8px;color:var(--ink-soft)}
+  .answer p{margin:0 0 10px}
+  .answer p:last-child{margin-bottom:0}
+  code{
+    font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--accent-soft);
+    color:var(--accent-ink);padding:1.5px 5px;border-radius:5px;
+  }
+  pre{
+    background:var(--code-bg);color:var(--code-ink);border-radius:10px;
+    padding:13px 15px;overflow-x:auto;margin:10px 0;
+  }
+  pre code{background:none;color:var(--code-ink);padding:0;font-size:13px;line-height:1.5}
 
-      <p>Hi, I&apos;m Jon Angelo, a Software Developer with over nine years of experience building web applications using technologies such as Next.js, React, Angular, TypeScript, Node.js, Supabase, WordPress, and Shopify.</p>
+  /* Checklist */
+  .check{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:14px 0 8px}
+  .check ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .check li{display:flex;gap:11px;align-items:center;font-size:15px}
+  .box{width:18px;height:18px;border:2px solid var(--accent);border-radius:5px;flex-shrink:0}
 
-      <p>Throughout my career, I&apos;ve enjoyed building responsive, user-friendly applications with a strong focus on creating intuitive user experiences. I like turning designs into clean, maintainable interfaces and building forms that are easy to understand and complete, while ensuring users get the right amount of information without feeling overwhelmed.</p>
+  footer{padding:40px 0 60px;color:var(--ink-faint);font-size:13px;font-family:'JetBrains Mono',monospace;border-top:1px solid var(--line);margin-top:40px}
 
-      <p>Most recently, I worked at StairPay, where I developed and maintained large-scale web applications using Next.js, React, TypeScript, and Supabase. I collaborated closely with designers, product managers, and backend developers to deliver new features and improve the overall user experience.</p>
+  @media (max-width:560px){
+    .masthead{padding:36px 0 24px}
+    .answer{padding-left:18px}
+    .count{width:100%;margin-left:0;order:3}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
 
-      <p>What excites me about Bridgit is the opportunity to continue building products in the property and finance space. Although my previous experience was primarily in proptech, I worked extensively with affordability, mortgages, and customer-facing financial workflows, so I see a strong overlap with Bridgit&apos;s mission. I&apos;m excited to contribute my frontend experience while continuing to grow in the fintech domain.</p>
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Interview Prep · 30-min Recruiter Screen</p>
+    <h1>Doneverse — Senior Full-Stack Engineer</h1>
+    <div class="stack">
+      <span>React</span><span>React Native</span><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span>
+    </div>
 
-      <h5 className="font-bold">Can you tell me about your previous role</h5>
+    <div class="battle">
+      <div class="strat">
+        <h3><span class="tag-gap">▲</span> The one real gap — React Native</h3>
+        <p>Not on your resume, but listed as required. Don't bluff. "Web-first so far, haven't shipped RN to the stores — but React + TS is deep and it's the same model, so I'd ramp fast." Honesty reads senior.</p>
+      </div>
+      <div class="strat">
+        <h3><span class="tag-edge">◆</span> Your edge — hardening AI-generated code</h3>
+        <p>The JD's core theme. You've been doing exactly this on Campaignr — validation, auth, secrets, N+1s, tests. Few candidates can speak to it from real recent work. Lead with it.</p>
+      </div>
+      <div class="strat">
+        <h3><span style="color:var(--accent-ink)">₱</span> Salary — go in anchored</h3>
+        <p>Company has a low-comp reputation. Decide an X–Y band before the call. Deflection line: "What range is the role budgeted for?" Don't give a single number first.</p>
+      </div>
+    </div>
+  </div>
+</header>
 
-      <p>In my previous role at StairPay, I was responsible for developing and maintaining frontend features for two connected web applications using Next.js, React, TypeScript, and Supabase.</p>
+<nav class="jump">
+  <div class="wrap jump-inner">
+    <a href="#fit">Fit</a>
+    <a href="#js">JS Core</a>
+    <a href="#react">React</a>
+    <a href="#ts">TypeScript</a>
+    <a href="#node">Node</a>
+    <a href="#pg">Postgres</a>
+    <a href="#rn">RN</a>
+    <a href="#test">Testing</a>
+    <a href="#arch">Architecture</a>
+    <a href="#sec">Security</a>
+    <a href="#pay">Payments</a>
+    <a href="#git">Git</a>
+    <button class="reveal-btn" id="revealAll" aria-pressed="false">Reveal all</button>
+  </div>
+</nav>
 
-      <p>The platform was built for Housing Associations in the UK, which are non-profit organizations that own, manage, and develop affordable housing. One of the services the platform currently supports is Shared Ownership, where residents purchase a share of a property and pay rent on the remaining share.</p>
+<main class="wrap">
 
-      <p>I worked on the Resident Portal, where residents could complete their onboarding by providing their Shared Ownership, property, and mortgage information. They could also use our affordability calculators and submit staircasing applications to purchase additional shares of their home.</p>
+<!-- FIT -->
+<section id="fit">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Initial / Fit Questions</h2><span class="count">10 scripts</span></div>
+  <p class="sec-note">Rehearse these out loud. Answers are drawn from your actual resume — swap in real numbers where you can.</p>
 
-      <p>I also worked on the Housing Association platform, where staff could review and manage staircasing applications, manage developments and property units, publish listings, and monitor resident cases. Throughout the project, I focused on building responsive, user-friendly interfaces and creating intuitive forms that made complex processes easier for users to complete.</p>
+  <div class="script">
+    <p class="q">Tell me about yourself</p>
+    <div class="say">"I'm a full-stack developer with 9 years of experience, mostly building React and Next.js apps with Node and TypeScript on PostgreSQL. Most recently at Stairpay I owned a resident portal and a listings management platform end-to-end. Before that at Twenty7tec I built a large-scale communication platform and reusable web plugins for UK clients. All my roles have been remote with US and UK teams. Lately I've been building my own SaaS, which keeps me hands-on with modern React tooling and productionizing AI-assisted code. This role stood out because it's exactly that kind of work — owning features and hardening real products."</div>
+    <p class="coach">~75 seconds. Lead with strengths, not chronology. End on why this role.</p>
+  </div>
 
-      <h5 className="font-bold">What you know about the company</h5>
+  <div class="script">
+    <p class="q">Why this role / Doneverse?</p>
+    <div class="say">"Two things — the ownership, since the JD talks about engineering judgment mattering and owning features end-to-end, which is how I like to work. And the AI-generated code angle: I've been building a SaaS where a lot of scaffolding is AI-assisted, so debugging and productionizing that code is fresh for me, and that's central to this role."</div>
+  </div>
 
-      <p>Based on my research, Bridgit is an Australian non-bank lender that specializes in bridging loans, helping homeowners buy their next property before selling their current one. I came across concepts such as bridging loans and commercial loans while working with mortgage calculators at Twenty7Tec, although I wasn&apos;t directly involved in building lending products.</p>
+  <div class="script">
+    <p class="q">Why did you leave Stairpay / what are you doing now?</p>
+    <div class="say">"My time at Stairpay wrapped up earlier this year. Since then I've been building a full-stack SaaS to stay sharp — a landing page builder with a dual-portal architecture, Stripe payments, and role-based access. It's kept me deep in Next.js, auth, and production concerns — the most relevant recent work to this role."</div>
+    <p class="coach">Turns the gap into initiative. Don't apologize for it.</p>
+  </div>
 
-      <p>I understand that the Australian market is different from the UK, but I&apos;m confident I can quickly adapt to the different regulations, calculations, and business processes. Many of the core concepts, such as mortgages, affordability, and lending, are similar, so I believe my previous experience gives me a strong foundation to get up to speed quickly.</p>
+  <div class="script">
+    <p class="q">Walk me through a project you owned end-to-end</p>
+    <div class="say">"At Stairpay I built the Resident Portal in Next.js and Supabase. Residents needed one place to self-serve documents, payments, affordability checks, and property info. I scoped it with the PM, designed the Postgres data model, built the auth and server logic, and shipped it — consolidating things residents used to email support about into one self-service platform."</div>
+  </div>
 
-      <p>What also interests me about Bridgit is the opportunity to work at the intersection of property and finance. Having spent the last few years building products around property ownership, affordability, and customer-facing financial workflows, I feel my experience aligns well with the type of problems Bridgit is solving.</p>
+  <div class="script">
+    <p class="q">Tell me about improving code someone else wrote</p>
+    <div class="say">"At Captivate Chat I took over a chatbot widget and chat platform built on Angular and progressively migrated the frontend to React. The codebase had grown messy, so I refactored incrementally — keeping it shippable the whole time rather than a big-bang rewrite — while adding features clients needed."</div>
+    <p class="coach">Directly answers the JD's "maintain and improve code written by others."</p>
+  </div>
 
-      <hr />
+  <div class="script">
+    <p class="q">What's your React Native experience?</p>
+    <div class="say">"My production mobile experience has been web-first — I haven't shipped a React Native app to the stores yet. But my React and TypeScript are deep, and RN shares the same component model, so I'd ramp quickly. I'd rather be upfront than oversell it."</div>
+    <p class="coach">If you've touched RN even in side projects, say so specifically.</p>
+  </div>
 
-      <h5 className="font-bold">Tell me about yourself.</h5>
-      <p>
-        Hi, I&apos;m Jon Angelo, a Software Developer with over nine years of experience building web applications using technologies such as Next.js, React, Angular, TypeScript, Node.js, Supabase, WordPress, and Shopify. I enjoy turning designs into responsive and user-friendly interfaces while creating intuitive forms and experiences that are easy to use. Most recently, I worked at StairPay, where I developed and maintained frontend features for platforms used by UK Housing Associations and Shared Ownership residents. What excites me about Bridgit is the opportunity to continue building products in the property and finance space while contributing my frontend expertise and learning more about the lending industry.
-      </p>
+  <div class="script">
+    <p class="q">Salary expectations?</p>
+    <div class="say">"I'm looking in the range of [X to Y] depending on the full package. What range is the role budgeted for?"</div>
+    <p class="coach">Decide X–Y first. Senior remote for US/AU clients can sit above local averages. If pushed for one number, deflect once and ask their range.</p>
+  </div>
 
-      <h5 className="font-bold">Why are you looking for a new opportunity?</h5>
-      <p>
-        I&apos;m grateful for everything I&apos;ve learned in my previous role, but I&apos;m looking for a new challenge where I can continue growing as a frontend engineer. I&apos;m interested in working on a product with a different set of technical challenges, collaborating with experienced engineers, and contributing to a company that&apos;s making a real impact in the property and fintech space.
-      </p>
+  <div class="script">
+    <p class="q">Comfortable with permanent work-from-home?</p>
+    <div class="say">"Yes — every role for the last 9 years has been fully remote with overseas teams, so I have a reliable setup and I'm used to async work across time zones."</div>
+  </div>
 
-      <h5 className="font-bold">Why do you want to join Bridgit?</h5>
-      <p>
-        Bridgit stood out to me because it combines technology, property, and finance, which closely aligns with my recent experience. I&apos;ve worked on products involving affordability, mortgages, and customer-facing financial workflows, so I see a strong overlap. I also like that Bridgit is a technology-driven company focused on improving a traditionally complex lending process, and I&apos;d love to contribute to that mission.
-      </p>
+  <div class="script">
+    <p class="q">Notice period / availability?</p>
+    <div class="say">Answer honestly and simply. If you can start soon, say so — it's a plus.</div>
+  </div>
 
-      <h5 className="font-bold">What do you know about Bridgit?</h5>
-      <p>
-        Based on my research, Bridgit is an Australian non-bank lender that specializes in bridging loans, helping homeowners purchase their next property before selling their current one. I understand that the company focuses on simplifying the lending process through technology and providing a faster, more convenient customer experience. Although the Australian market differs from the UK, many concepts such as mortgages, affordability, and lending are familiar to me from my previous work.
-      </p>
+  <div class="script">
+    <p class="q">What are you looking for in your next role?</p>
+    <div class="say">"Ownership and technical influence — owning features from concept to deployment, making real architecture decisions, and working on products that ship to real users. Which is what this role describes."</div>
+  </div>
+</section>
+
+<!-- JS CORE -->
+<section id="js">
+  <div class="sec-head"><span class="sec-num">02</span><h2>JavaScript Fundamentals</h2><span class="count">10 Q</span></div>
+  <p class="sec-note">Click a question to reveal the answer — quiz yourself first.</p>
+
+  <details class="qa"><summary><span class="chev">›</span>What is a closure?</summary>
+    <div class="answer"><p>A function that keeps access to variables from its lexical scope even after the outer function has returned. Used for private state, callbacks, and memoization.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>== vs === ?</summary>
+    <div class="answer"><p><code>==</code> compares with type coercion; <code>===</code> is strict, no coercion. Default to <code>===</code> to avoid surprising conversions.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Explain hoisting.</summary>
+    <div class="answer"><p>Declarations are moved to the top of their scope. <code>var</code> and function declarations are hoisted (var initialized to <code>undefined</code>); <code>let</code>/<code>const</code> are hoisted but sit in a "temporal dead zone" until declared, so accessing them early throws.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Promises vs async/await?</summary>
+    <div class="answer"><p>async/await is syntactic sugar over promises — cleaner sequential-looking code. Still promises underneath; use try/catch for errors and <code>Promise.all</code> for concurrency.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Microtasks vs macrotasks?</summary>
+    <div class="answer"><p>Promise callbacks and <code>queueMicrotask</code> are microtasks; <code>setTimeout</code>/I/O are macrotasks. The microtask queue drains completely after each task, before the next macrotask — which is why a resolved promise runs before a 0ms timeout.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How is <code>this</code> determined?</summary>
+    <div class="answer"><p>By the call site: method call → the object; plain call → undefined/global; arrow functions inherit <code>this</code> lexically; <code>call</code>/<code>apply</code>/<code>bind</code> set it explicitly.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Shallow vs deep copy?</summary>
+    <div class="answer"><p>Shallow (<code>{...obj}</code>, <code>Object.assign</code>) copies the top level only — nested objects stay shared by reference. Deep copy duplicates everything (<code>structuredClone</code>, or the JSON round-trip for simple data).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is event delegation?</summary>
+    <div class="answer"><p>Attach one listener to a parent and read <code>event.target</code> to handle events from many/dynamic children — fewer listeners, works for elements added later.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Difference between map, filter, reduce?</summary>
+    <div class="answer"><p><code>map</code> transforms each item (same length), <code>filter</code> keeps items passing a test, <code>reduce</code> folds the array into a single value (sum, object, grouping).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Implement debounce.</summary>
+    <div class="answer"><pre><code>function debounce(fn, ms){
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+}</code></pre><p>Debounce waits until calls stop for <code>ms</code>; throttle instead runs at most once per <code>ms</code>.</p></div></details>
+</section>
+
+<!-- REACT -->
+<section id="react">
+  <div class="sec-head"><span class="sec-num">03</span><h2>React &amp; Next.js</h2><span class="count">16 Q</span></div>
+  <p class="sec-note">Your strongest area — know these cold.</p>
+
+  <details class="qa"><summary><span class="chev">›</span>Server Components vs Client Components (App Router)?</summary>
+    <div class="answer"><p>Server Components render on the server, ship no JS, and can hit the backend directly — but no state/effects/browser APIs. Client Components (<code>"use client"</code>) handle interactivity. Keep components server by default and push interactivity to small leaf client components.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What causes a hydration error and how do you fix it?</summary>
+    <div class="answer"><p>The server HTML must match the client's first render. Reading <code>window</code>/<code>localStorage</code>, <code>Date.now()</code>, or random values during render causes a mismatch. Fix: defer client-only values behind a <code>mounted</code> flag in <code>useEffect</code>, use <code>suppressHydrationWarning</code>, or <code>next-themes</code> for dark mode.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>SSR vs SSG vs ISR vs CSR?</summary>
+    <div class="answer"><p>CSR renders in the browser; SSR renders per request on the server; SSG renders at build time; ISR is SSG that re-generates on a schedule (<code>revalidate</code>). Choose by how fresh the data must be vs how cacheable it is.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>useMemo vs useCallback?</summary>
+    <div class="answer"><p><code>useMemo</code> memoizes a computed value; <code>useCallback</code> memoizes a function reference. Use to avoid expensive recomputation or keep stable references for memoized children/effect deps. Don't over-apply — memoization has its own cost.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How does React decide what to re-render?</summary>
+    <div class="answer"><p>A state/prop change re-renders the component and its subtree. React diffs the new virtual DOM against the old (reconciliation) and commits only the differences. <code>key</code> helps match list items; <code>React.memo</code>/<code>useMemo</code>/<code>useCallback</code> trim unnecessary child renders.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Common useEffect mistakes?</summary>
+    <div class="answer"><p>Wrong dependency arrays (stale closures or infinite loops), missing cleanup for subscriptions/timers, and using effects for values you could derive during render. Rule: if you can compute it during render, don't use an effect.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Why does the <code>key</code> prop matter?</summary>
+    <div class="answer"><p>It gives list items a stable identity so React reuses DOM nodes instead of recreating them. Array index as key breaks on reorder/insert — use a stable unique id.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Data fetching in the App Router?</summary>
+    <div class="answer"><p>Fetch directly inside async Server Components — no client waterfall. Next extends <code>fetch</code> with caching and revalidation. For client interactivity, React Query or SWR.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are Server Actions?</summary>
+    <div class="answer"><p>Async functions marked <code>"use server"</code> that you call from components to run mutations on the server without hand-writing an API route — good for form submissions with progressive enhancement.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How does Next.js middleware help with auth?</summary>
+    <div class="answer"><p>Middleware runs before a request completes, at the edge — ideal for checking a session/token and redirecting unauthenticated users before the page renders. Enforce protected routes centrally there rather than per-page.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Controlled vs uncontrolled components?</summary>
+    <div class="answer"><p>Controlled: React state is the source of truth (<code>value</code> + <code>onChange</code>). Uncontrolled: the DOM holds the value, read via ref. React Hook Form uses refs (uncontrolled) to cut re-renders on large forms.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Context API vs a state library?</summary>
+    <div class="answer"><p>Context suits low-frequency global values (theme, auth). It re-renders all consumers on change, so it's poor for high-frequency state — use Zustand/Redux there. Server data is usually better handled by React Query than global client state.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is an error boundary?</summary>
+    <div class="answer"><p>A component (class-based or via a library) that catches render errors in its children and shows fallback UI instead of crashing the whole tree. Pair with logging.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What does Suspense do?</summary>
+    <div class="answer"><p>It shows a fallback while async children (data or lazy components) load. In Next, it enables streaming — fast parts of the page render while slow parts stream in.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>When would you write a custom hook?</summary>
+    <div class="answer"><p>To extract and reuse stateful logic across components — e.g. <code>useDebounce</code>, <code>useAuth</code>, <code>useFetch</code>. It's just a function starting with "use" that calls other hooks.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is a React portal?</summary>
+    <div class="answer"><p>Renders children into a different DOM node outside the parent hierarchy while keeping React context — used for modals, tooltips, and toasts that must escape overflow/z-index constraints.</p></div></details>
+</section>
+
+<!-- TS -->
+<section id="ts">
+  <div class="sec-head"><span class="sec-num">04</span><h2>TypeScript</h2><span class="count">11 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>type vs interface?</summary>
+    <div class="answer"><p><code>interface</code> is for object shapes, supports declaration merging and <code>extends</code>. <code>type</code> is more flexible — unions, intersections, mapped/conditional types. Interface for public object contracts, type for unions/composition.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>any vs unknown?</summary>
+    <div class="answer"><p><code>any</code> disables checking. <code>unknown</code> is the type-safe top type — you must narrow before use. Prefer <code>unknown</code> for uncertain shapes (API responses, catch clauses).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Give a use of generics.</summary>
+    <div class="answer"><pre><code>function first&lt;T&gt;(arr: T[]): T | undefined {
+  return arr[0];
+}</code></pre><p>Generics keep code reusable while preserving the caller's specific type instead of collapsing to <code>any</code>.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Useful utility types?</summary>
+    <div class="answer"><p><code>Partial</code>, <code>Required</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>, <code>ReturnType</code>. Great for deriving DTOs/patch types from a base model without duplicating shapes.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is a discriminated union?</summary>
+    <div class="answer"><pre><code>type Result =
+  | { status: 'ok'; data: string }
+  | { status: 'error'; message: string };</code></pre><p>Checking the shared literal (<code>status</code>) narrows to the right branch — safer than optional fields everywhere.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>keyof and typeof?</summary>
+    <div class="answer"><p><code>keyof T</code> gives a union of a type's keys; <code>typeof value</code> gets the type of a runtime value. Combined — <code>keyof typeof obj</code> — you derive key unions from a constant object.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are mapped types?</summary>
+    <div class="answer"><p>Types built by iterating keys of another type: <code>{ [K in keyof T]: ... }</code>. Utility types like <code>Partial</code> are mapped types under the hood.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Type guards / narrowing?</summary>
+    <div class="answer"><p>Runtime checks that narrow a type — <code>typeof</code>, <code>instanceof</code>, <code>in</code>, or a custom predicate <code>function isCat(x): x is Cat</code>. After the check, TS treats the value as the narrower type.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What does <code>as const</code> do?</summary>
+    <div class="answer"><p>Makes a literal deeply readonly and narrows it to its exact value rather than the widened type (e.g. <code>'GET'</code> instead of <code>string</code>). Useful for config objects and action types.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Enums vs union types?</summary>
+    <div class="answer"><p>String-literal unions (<code>'admin' | 'user'</code>) are usually preferred — zero runtime cost, readable. Enums emit runtime objects and numeric enums have footguns.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is the non-null assertion (<code>!</code>)?</summary>
+    <div class="answer"><p><code>value!</code> tells TS a value isn't null/undefined. Use sparingly — it silences the compiler rather than proving safety, so prefer a real check when you can.</p></div></details>
+</section>
+
+<!-- NODE -->
+<section id="node">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Node.js &amp; Express</h2><span class="count">11 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>How does Node handle concurrency if it's single-threaded?</summary>
+    <div class="answer"><p>JS runs on one thread, but I/O is non-blocking — Node hands I/O to libuv/the OS and a thread pool, then runs your callbacks when results arrive. The event loop processes phases (timers, poll, check…). CPU-bound work blocks it, so offload to worker threads or a queue.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is Express middleware?</summary>
+    <div class="answer"><p>Functions with <code>(req, res, next)</code> that run in order on the request pipeline — auth, logging, parsing, validation, error handling. <code>next()</code> passes control along.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Handling errors in async routes?</summary>
+    <div class="answer"><p>Async errors don't reach Express automatically. Wrap handlers in try/catch calling <code>next(err)</code> (or an async-wrapper helper), and finish with a centralized error middleware <code>(err, req, res, next)</code>.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>process.nextTick vs setImmediate?</summary>
+    <div class="answer"><p><code>nextTick</code> callbacks run before the event loop continues (highest priority, can starve I/O if abused). <code>setImmediate</code> runs on the next loop iteration's check phase. Prefer <code>setImmediate</code> for "run soon without blocking."</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>JWT vs session auth?</summary>
+    <div class="answer"><p>Sessions store state server-side — easy to revoke, needs a store. JWTs are stateless and scale horizontally but are harder to revoke early. Store tokens in httpOnly cookies (not localStorage) to limit XSS. Common pattern: short access token + refresh token.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you scale a Node app?</summary>
+    <div class="answer"><p>Run multiple processes (cluster module or a process manager like PM2) to use all CPU cores, put them behind a load balancer, keep state external (DB/Redis) so instances are stateless, and offload heavy work to queues.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is CORS?</summary>
+    <div class="answer"><p>Browsers block cross-origin requests by default. The server opts in by returning <code>Access-Control-Allow-Origin</code> (and related) headers. It's enforced by the browser, not the server.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you keep secrets out of code?</summary>
+    <div class="answer"><p>Environment variables from a gitignored <code>.env</code> locally and a secret manager in prod. Validate them at startup (e.g. with Zod) so misconfiguration fails fast.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are streams and why use them?</summary>
+    <div class="answer"><p>They process data in chunks instead of buffering it all in memory — essential for large files, uploads, and piping. Keeps memory flat and starts work before all data arrives.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you implement rate limiting?</summary>
+    <div class="answer"><p>Track requests per key (IP or user) in a fast store like Redis with a sliding or fixed window, reject over the limit with 429. Middleware like <code>express-rate-limit</code> handles the common case.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is graceful shutdown?</summary>
+    <div class="answer"><p>On <code>SIGTERM</code>, stop accepting new connections, let in-flight requests finish, close DB/pool connections, then exit — so deploys don't drop live requests.</p></div></details>
+</section>
+
+<!-- POSTGRES -->
+<section id="pg">
+  <div class="sec-head"><span class="sec-num">06</span><h2>PostgreSQL &amp; Databases</h2><span class="count">15 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>How do indexes work, and when do they hurt?</summary>
+    <div class="answer"><p>Usually a B-tree that turns full scans into fast lookups. Costs: slower writes, more storage. Won't help low-selectivity columns or when you wrap the column in a function. In composite indexes, column order matters (leftmost-prefix rule).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is the N+1 query problem?</summary>
+    <div class="answer"><p>Fetching a list (1 query) then querying per item in a loop (N queries). Fix with a JOIN, an <code>IN (...)</code> batch, ORM eager loading, or a DataLoader batcher.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you debug a slow query?</summary>
+    <div class="answer"><p><code>EXPLAIN ANALYZE</code> to see the plan and real timings — look for sequential scans on big tables, bad row estimates, expensive sorts. Then add/adjust indexes, rewrite, or reduce rows scanned.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Explain transactions / ACID.</summary>
+    <div class="answer"><p>A transaction groups statements so they all commit or all roll back. ACID = Atomicity, Consistency, Isolation, Durability. Use them when multiple writes must stay consistent (deduct balance + create record together).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>JOIN types?</summary>
+    <div class="answer"><p>INNER (matches only), LEFT (all left + matches), RIGHT (mirror), FULL (all from both). Most app queries are INNER or LEFT.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Normalization vs denormalization?</summary>
+    <div class="answer"><p>Normalization removes duplication and keeps data consistent (more JOINs). Denormalization duplicates for faster reads (drift risk). Start normalized; denormalize hot read paths selectively.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is connection pooling?</summary>
+    <div class="answer"><p>Reusing a fixed set of DB connections across requests, since opening one is expensive. Critical in serverless, where many instances can exhaust connection limits — hence PgBouncer / the Supabase pooler.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is Row Level Security?</summary>
+    <div class="answer"><p>Postgres policies that decide which rows a user can read/write at the DB level based on their auth identity. Great for multi-tenant apps — rules live in the database, not just the app.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is a CTE?</summary>
+    <div class="answer"><p>A <code>WITH</code> clause that names a subquery for readability and reuse within one statement; also supports recursion (trees, hierarchies).</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are window functions?</summary>
+    <div class="answer"><p>They compute across a set of rows related to the current row without collapsing them — <code>ROW_NUMBER</code>, <code>RANK</code>, running totals, per-group ranking. Unlike <code>GROUP BY</code>, rows are preserved.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you do an upsert?</summary>
+    <div class="answer"><p><code>INSERT ... ON CONFLICT (key) DO UPDATE SET ...</code> — insert or update in one atomic statement.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>UUID vs serial primary keys?</summary>
+    <div class="answer"><p>UUIDs avoid enumeration and merge conflicts and suit distributed systems, but are larger and less cache-friendly. Serial/identity ints are smaller, ordered, faster to index. Pick per needs.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are isolation levels?</summary>
+    <div class="answer"><p>Read Committed (Postgres default), Repeatable Read, and Serializable — increasing consistency at the cost of concurrency. Higher levels prevent anomalies like phantom reads but risk more serialization failures.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>When would you use JSONB?</summary>
+    <div class="answer"><p>For flexible/semi-structured data you still want to query and index (GIN indexes). Don't use it to avoid modeling well-known relational data — you lose constraints and clarity.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you handle schema migrations?</summary>
+    <div class="answer"><p>Version-controlled, incremental migration files run in order (Prisma Migrate, Knex, etc.), tested in staging, and applied in CI. Make destructive changes backwards-compatible and roll out in steps.</p></div></details>
+</section>
+
+<!-- RN -->
+<section id="rn">
+  <div class="sec-head"><span class="sec-num">07</span><h2>React Native</h2><span class="count">7 Q</span></div>
+  <p class="sec-note">Your growth area — competent, honest answers. Don't overclaim depth.</p>
+
+  <details class="qa"><summary><span class="chev">›</span>How does RN differ from React web?</summary>
+    <div class="answer"><p>Same React model, but it renders native views (<code>&lt;View&gt;</code>, <code>&lt;Text&gt;</code>) instead of DOM, styles via a JS StyleSheet (flexbox, no CSS/HTML), and uses native navigation/APIs. Logic and hooks transfer; the UI layer and platform concerns differ.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Expo vs bare React Native?</summary>
+    <div class="answer"><p>Expo is managed tooling — faster setup, over-the-air updates, a big API set, but limits on custom native modules. Bare gives full native control at the cost of more setup. Many teams start on Expo and eject only if needed.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Platform-specific code?</summary>
+    <div class="answer"><p><code>Platform.OS</code> checks, or <code>.ios.tsx</code>/<code>.android.tsx</code> file extensions that RN resolves automatically.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Performance considerations?</summary>
+    <div class="answer"><p>Use virtualized <code>FlatList</code>/<code>SectionList</code> for big lists, memoize rows, keep heavy work off the JS thread, and minimize re-renders. The new architecture (Fabric/JSI) reduces old bridge overhead.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How is navigation handled?</summary>
+    <div class="answer"><p>Typically React Navigation — stack, tab, and drawer navigators — or Expo Router for file-based routing similar to Next.js.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Local storage in RN?</summary>
+    <div class="answer"><p>AsyncStorage for simple key-value data; MMKV for faster storage; SecureStore/Keychain for tokens and secrets.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you handle different screen sizes?</summary>
+    <div class="answer"><p>Flexbox layouts, the <code>Dimensions</code>/<code>useWindowDimensions</code> API, percentage and flex sizing, and safe-area handling for notches. Test on multiple device sizes.</p></div></details>
+</section>
+
+<!-- TESTING -->
+<section id="test">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Testing</h2><span class="count">7 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>Unit vs integration vs e2e?</summary>
+    <div class="answer"><p>Unit = one unit in isolation. Integration = several pieces together (component + hook + mocked API). E2e = the full app in a real browser/device (Playwright/Cypress/Detox). Favor many fast unit/integration tests, fewer e2e.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Testing Library philosophy?</summary>
+    <div class="answer"><p>Test behavior the user experiences, not implementation details — query by role/text, assert on what renders. Tests then survive refactors.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What do you test first?</summary>
+    <div class="answer"><p>Critical paths and business logic — auth, payments, data transforms, edge cases — over trivial getters. Prioritize where a bug hurts most.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Is 100% coverage the goal?</summary>
+    <div class="answer"><p>No — coverage measures lines executed, not correctness. High coverage on meaningless assertions is false comfort. Aim for meaningful tests on important paths, not a number.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you test async code?</summary>
+    <div class="answer"><p><code>await</code> the result or use <code>findBy</code>/<code>waitFor</code> queries that retry until the async update lands. Mock network calls so tests stay fast and deterministic.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is snapshot testing — and its risk?</summary>
+    <div class="answer"><p>It saves rendered output and flags changes. Useful for stable UI, but large snapshots get rubber-stamped on update and stop catching real regressions. Keep them small and intentional.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Jest vs Vitest?</summary>
+    <div class="answer"><p>Same testing model; Vitest is faster and native to Vite/ESM projects, Jest is the long-standing default with a huge ecosystem. Choose based on your build tooling.</p></div></details>
+</section>
+
+<!-- ARCH -->
+<section id="arch">
+  <div class="sec-head"><span class="sec-num">09</span><h2>System Design &amp; Architecture</h2><span class="count">13 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>How would you harden an AI-generated prototype for production? <em>(JD's core theme)</em></summary>
+    <div class="answer"><p>Read it end-to-end to grasp intent. Then: add input validation and error handling, pull hardcoded secrets into env, add auth/authorization checks, fix N+1s and missing indexes, add tests on critical paths, set up types + linting, and add logging/monitoring. Refactor incrementally so it stays shippable — not a big-bang rewrite.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you approach a messy/unfamiliar codebase?</summary>
+    <div class="answer"><p>Map entry points and data flow, get it running locally, make one small safe change to build confidence, add tests around an area before refactoring, and improve in small reviewable PRs. Don't rewrite what you don't yet understand.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you design RBAC?</summary>
+    <div class="answer"><p>Define roles and permissions, attach roles to users, enforce checks in middleware/server actions — never trust the client. For data isolation, enforce at the DB layer too (Postgres RLS). Keep permission logic centralized and auditable.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you make an API scale?</summary>
+    <div class="answer"><p>Add indexes and fix slow queries, cache hot reads (Redis/CDN), paginate large lists, use connection pooling, add rate limiting, and move slow work to background jobs. Measure before optimizing.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>REST API design best practices?</summary>
+    <div class="answer"><p>Resource nouns, correct verbs and status codes, consistent error shapes, pagination/filtering on collections, versioning, and validation on every input. Keep responses predictable.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Caching strategies — and the hard part?</summary>
+    <div class="answer"><p>Cache-aside (read-through), CDN for static assets, in-memory/Redis for hot data. The hard part is invalidation — use TTLs, event-based busting on writes, or versioned keys so stale data doesn't linger.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is idempotency and why does it matter?</summary>
+    <div class="answer"><p>A repeated request has the same effect as one request. Vital for payments and retries — clients send an idempotency key so a network retry doesn't double-charge or double-create.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>When would you use a message queue?</summary>
+    <div class="answer"><p>To decouple slow or spiky work from the request cycle — emails, image processing, webhooks. The API enqueues and returns fast; workers process asynchronously and retry on failure.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Horizontal vs vertical scaling?</summary>
+    <div class="answer"><p>Vertical = bigger machine (simple, capped, single point of failure). Horizontal = more machines behind a load balancer (needs stateless services, scales further). Most web apps scale horizontally.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are read replicas?</summary>
+    <div class="answer"><p>Read-only DB copies that offload heavy reads from the primary. Watch for replication lag — send reads that must be current to the primary.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What are feature flags for?</summary>
+    <div class="answer"><p>Toggle features without deploying — gradual rollouts, A/B tests, and instant kill switches if something breaks in production.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you handle a production incident?</summary>
+    <div class="answer"><p>Stop the bleeding first (rollback / flag off), communicate status, diagnose with logs/monitoring, fix, verify, then run a blameless postmortem so it doesn't recur.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you keep code quality high across a team?</summary>
+    <div class="answer"><p>Shared lint/format/TS config, meaningful PR reviews, tests in CI, clear conventions, and docs for non-obvious decisions. Automate standards so they don't rely on memory.</p></div></details>
+</section>
+
+<!-- SECURITY -->
+<section id="sec">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Security</h2><span class="count">5 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>Core web security concerns?</summary>
+    <div class="answer"><p>SQL injection (parameterized queries), XSS (escape output, avoid <code>dangerouslySetInnerHTML</code>), CSRF (tokens / SameSite cookies), secrets in env not code, HTTPS everywhere, server-side input validation, and least-privilege access. Roughly the OWASP Top 10.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you prevent SQL injection?</summary>
+    <div class="answer"><p>Never concatenate user input into SQL — use parameterized queries / prepared statements (or a query builder/ORM that does). The input is treated as data, never executable SQL.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do you store passwords?</summary>
+    <div class="answer"><p>Hash with a slow, salted algorithm (bcrypt/argon2) — never plain text or fast hashes. Better still, offload auth to a provider (Supabase Auth, Auth0) so you don't handle raw passwords at all.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Why validate input on the server if the client already does?</summary>
+    <div class="answer"><p>Client validation is UX only — anyone can bypass it and hit your API directly. The server is the trust boundary, so validate every input there (e.g. with Zod) regardless of client checks.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>localStorage vs cookies for auth tokens?</summary>
+    <div class="answer"><p>localStorage is readable by any JS, so it's exposed to XSS. Prefer httpOnly, Secure, SameSite cookies so tokens aren't reachable from scripts, paired with CSRF protection.</p></div></details>
+</section>
+
+<!-- PAYMENTS -->
+<section id="pay">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Payments &amp; Integrations</h2><span class="count">4 Q</span></div>
+  <p class="sec-note">You've built Stripe auth-plus-capture on Campaignr — these are yours to win.</p>
+
+  <details class="qa"><summary><span class="chev">›</span>Authorization vs capture in card payments?</summary>
+    <div class="answer"><p>Authorization places a hold on funds without moving them; capture actually collects, later. Ideal for deposits or bookings — you authorize up front and capture (fully or partially) once you're sure, or release the hold if you cancel.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>How do webhooks work, and what do you watch for?</summary>
+    <div class="answer"><p>The provider calls your endpoint on events (e.g. <code>payment_intent.succeeded</code>). Verify the signature, respond fast (do heavy work async), and handle idempotently — the same event can arrive more than once.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>Why never trust the amount from the client?</summary>
+    <div class="answer"><p>A user can tamper with client-side values. Always compute and create the charge amount on the server from trusted data (the DB), so the price can't be manipulated in the browser.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What is Zod and where do you use it?</summary>
+    <div class="answer"><p>A runtime schema-validation library that also infers TS types from one schema. Validate untrusted input — form data, API bodies, env vars, webhook payloads — so bad data is rejected at the boundary with real type safety.</p></div></details>
+</section>
+
+<!-- GIT -->
+<section id="git">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Git &amp; Workflow</h2><span class="count">4 Q</span></div>
+
+  <details class="qa"><summary><span class="chev">›</span>Merge vs rebase?</summary>
+    <div class="answer"><p>Merge preserves history with a merge commit; rebase rewrites commits onto a new base for a linear history. Don't rebase shared/pushed branches — it rewrites history others rely on.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>A bad commit shipped to production — what do you do?</summary>
+    <div class="answer"><p>If it broke things, <code>git revert</code> to safely undo it with a new commit (rather than rewriting shared history), redeploy, then fix forward. For a fast rollback, redeploy the previous known-good build.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What makes a good pull request?</summary>
+    <div class="answer"><p>Small and focused, a clear description of what and why, passing tests/CI, and self-review first. Easier to review well means fewer bugs slip through.</p></div></details>
+
+  <details class="qa"><summary><span class="chev">›</span>What's in a CI/CD pipeline?</summary>
+    <div class="answer"><p>On push/PR: install, lint, type-check, run tests, build. On merge to main: deploy (often to staging first, then production), sometimes behind an approval. GitHub Actions is a common runner.</p></div></details>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Pre-call checklist</h2></div>
+  <div class="check">
+    <ul>
+      <li><span class="box"></span>75-second intro rehearsed out loud</li>
+      <li><span class="box"></span>React Native honesty answer ready</li>
+      <li><span class="box"></span>Salary range decided (X–Y) + deflection line</li>
+      <li><span class="box"></span>End-to-end project story — Stairpay portal</li>
+      <li><span class="box"></span>"Improved others' code" story — Captivate Angular→React</li>
+      <li><span class="box"></span>Hard-bug story — the hydration error</li>
+      <li><span class="box"></span>3–4 questions ready to ask them</li>
+      <li><span class="box"></span>Quiet space, stable internet, resume open</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">Study tool · self-quiz mode · tap any question to reveal · "Reveal all" to read straight through</footer>
 
       <h5 className="font-bold">Why should we hire you?</h5>
       <p>
