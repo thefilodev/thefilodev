@@ -241,6 +241,84 @@ const nextjsQuestions: InterviewQuestion[] = [
   },
 ];
 
+const reactQuestions: InterviewQuestion[] = [
+  {
+    question: "How does React render a component?",
+    answer:
+      "React renders a component by calling its function, building a virtual representation of the UI, and then comparing the new result with the previous one. If something changed, React updates only the parts of the DOM that need to change. This makes React efficient for interactive interfaces. In practice, I think about rendering as a repeatable process where the UI is derived from state and props rather than manually manipulated.",
+  },
+  {
+    question: "What is the difference between state and props?",
+    answer:
+      "Props are read-only values passed from a parent component to a child component. State is data owned by a component that can change over time. I use props to communicate data downward through the component tree and state to manage values that belong to a specific component or feature. A good rule is that props describe what a component receives, while state describes what it controls internally.",
+  },
+  {
+    question: "When do you lift state up in React?",
+    answer:
+      "I lift state up when two or more sibling components need to share or coordinate the same data. Instead of each component maintaining its own version of the truth, I move the state to the nearest common parent and pass the value and handlers down as props. This keeps the data flow predictable and avoids synchronization bugs. I only lift state as far as necessary because moving it too high can make components harder to reuse.",
+  },
+  {
+    question: "What is the purpose of the useEffect hook?",
+    answer:
+      "I use useEffect for side effects that need to happen after render, such as fetching data, subscribing to events, syncing with localStorage, or updating an external system. It is not for deriving values that can be calculated during render. I treat useEffect carefully because it can easily cause unnecessary rerenders or infinite loops if dependencies are wrong. In senior code, I try to keep effects focused and minimal.",
+  },
+  {
+    question: "How do you avoid unnecessary rerenders in React?",
+    answer:
+      "I start by keeping state local and only lifting it when multiple components truly need it. I avoid creating new props unnecessarily, split large components into smaller ones, and use memoization only when profiling shows it is useful. I also make sure effects are not updating state more often than needed. The goal is not to memoize everything, but to reduce work where it actually matters.",
+  },
+  {
+    question: "What is the difference between useMemo and useCallback?",
+    answer:
+      "useMemo memoizes a computed value, while useCallback memoizes a function reference. I use useMemo when calculating a derived value is expensive or when I want to keep a stable value reference. I use useCallback when I need to pass a stable function to child components or dependencies. I do not use them by default because unnecessary memoization can make code harder to read without improving performance.",
+  },
+  {
+    question: "What are custom hooks used for?",
+    answer:
+      "Custom hooks let me extract reusable logic from components into a clean, testable function. I use them when multiple components share behavior such as data fetching, form state, debouncing, permissions, or subscriptions. They help keep components focused on rendering while the hook handles behavior and state. A good custom hook makes the code easier to read and easier to reuse across the application.",
+  },
+  {
+    question: "What is the difference between controlled and uncontrolled components?",
+    answer:
+      "A controlled component gets its value from React state and updates through React event handlers. An uncontrolled component keeps its own internal DOM state and is usually accessed through a ref. I prefer controlled components for most forms because they are easier to validate, reset, and coordinate with application state. I use uncontrolled components when simplicity or performance makes them a better fit.",
+  },
+  {
+    question: "How do keys help in React lists?",
+    answer:
+      "Keys give React a stable way to identify list items between renders. They help React understand which items were added, removed, or reordered so it can update efficiently and preserve component state correctly. I always use a stable unique key rather than the array index when possible. Using indexes can cause bugs when list items are reordered, inserted, or deleted.",
+  },
+  {
+    question: "What is the React Context API used for?",
+    answer:
+      "I use Context to share values that many components need, such as theme, authentication state, locale, or global UI settings. It helps avoid passing props through many intermediate components. I do not use Context for everything because every update can cause consuming components to rerender. For highly frequent or complex state, I may prefer local state, a reducer, or a dedicated state-management solution.",
+  },
+  {
+    question: "When would you use useReducer instead of useState?",
+    answer:
+      "I use useReducer when state changes are more complex, when multiple state values are tightly related, or when updates need to follow a clear set of actions. It works well for forms, wizards, filters, and feature-level state machines. useReducer makes state transitions easier to reason about than scattered useState calls when the logic starts to grow. It is especially useful when the next state depends on the previous state in a structured way.",
+  },
+  {
+    question: "How do you handle errors in React?",
+    answer:
+      "I separate validation errors, network errors, and unexpected application errors because each one needs a different response. For UI-level issues, I show a clear message and give the user a way to retry or recover. For unexpected render failures, I use error boundaries in the appropriate part of the tree so one failure does not break the entire app. I also make sure server errors are logged properly so they can be diagnosed later.",
+  },
+  {
+    question: "What is the purpose of React Suspense?",
+    answer:
+      "Suspense lets the UI wait gracefully while some part of the interface is loading. I use it to show a fallback while a component or data boundary is not ready yet. It improves the user experience because the app can show meaningful loading states instead of blocking the whole page. In a senior application, I use Suspense strategically around boundaries where partial loading makes sense.",
+  },
+  {
+    question: "How do you structure a large React application?",
+    answer:
+      "I usually structure it by feature or domain rather than by component type alone. That means keeping related components, hooks, services, and utilities close together inside a feature folder. I separate reusable shared UI from feature-specific code and avoid one giant components folder that becomes hard to navigate. This approach makes the app easier to scale because developers can find the code they need quickly and change one feature without affecting unrelated parts of the app.",
+  },
+  {
+    question: "How do you decide when to extract a component?",
+    answer:
+      "I extract a component when a piece of UI is reused, has a clear responsibility, or is becoming too complex to understand in place. I avoid extracting too early because overly small components can make code harder to follow. The best time to extract is when the logic or markup is clearly repeated or when a section has a distinct concern such as rendering, interaction, or formatting. My goal is readability and maintainability, not creating the maximum number of components.",
+  },
+];
+
 const backendServerDatabaseQuestions: InterviewQuestion[] = [
   {
     question: "How do you design a reliable backend API?",
@@ -447,7 +525,7 @@ export default function Main() {
   return (
     <main className="relative flex-1 space-y-3 bg-background p-3">
       <div className="space-y-6">
-        {[...interviewQuestions, ...nextjsQuestions, ...backendServerDatabaseQuestions, ...commonTechnicalInterviewQuestions].map(({ question, answer }, index) => (
+        {[...interviewQuestions, ...nextjsQuestions, ...reactQuestions, ...backendServerDatabaseQuestions, ...commonTechnicalInterviewQuestions].map(({ question, answer }, index) => (
           <section
             key={question}
             className="space-y-3 rounded-lg border bg-card p-4"
